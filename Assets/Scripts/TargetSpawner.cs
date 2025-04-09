@@ -42,7 +42,6 @@ public class TargetSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("TargetSpawner script started.");
         StartCoroutine(SpawnTargets()); // 启动生成目标的协程
     }
 }

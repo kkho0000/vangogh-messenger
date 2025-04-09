@@ -8,6 +8,7 @@ public class TargetController : MonoBehaviour
     private GameObject Lines; // 线段数组
     private GameObject player; // 玩家物体
     private GameObject spawner; // 生成器物体
+    private SphereCollider sphereCollider; // 球形碰撞器
     private bool isAvaliable = true; // 是否可用
     private bool isMouseOver = false; // 鼠标是否悬停在物体上
 
@@ -19,7 +20,7 @@ public class TargetController : MonoBehaviour
 
         // 计算线段的方向和长度（基于世界坐标系）
         Vector3 direction = end - start;
-        float distance = direction.magnitude-1f;
+        float distance = direction.magnitude;
 
         // 设置线段的旋转（基于世界坐标系）
         float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg; // 使用 x 和 z 计算角度
@@ -31,12 +32,13 @@ public class TargetController : MonoBehaviour
         Vector3 center = start + direction / 2;
         line.transform.position = center;
         line.transform.rotation = Quaternion.LookRotation(direction);
-        line.transform.Rotate(90, 0, 0); // 调整为 y 轴对齐到方向
+        line.transform.Rotate(-90, 0, 0); // 调整为 y 轴对齐到方向
 
         // 设置线段数据
         LineData lineData = line.GetComponent<LineData>();
-        lineData.startPoint = start; // 设置线段的起点（世界坐标）
-        lineData.endPoint = end; // 设置线段的终点（世界坐标）
+        // 计算变换后的 start 和 end 坐标
+        lineData.startPoint = start; // 将局部坐标 start 转换为世界坐标
+        lineData.endPoint = end; // 将局部坐标 end 转换为世界坐标
         lineData.lineColor = originColor; // 设置线段的颜色
 
         // 设置线段的父物体为线段数组
@@ -47,6 +49,7 @@ public class TargetController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player"); // 获取玩家物体
         Lines = GameObject.FindGameObjectWithTag("Lines"); // 获取线段数组物体
+        sphereCollider = GetComponent<SphereCollider>(); // 获取球形碰撞器组件
         spawner = transform.parent.gameObject; // 获取生成器物体
     }
 
@@ -115,7 +118,8 @@ public class TargetController : MonoBehaviour
         if (!isAvaliable) return; // 如果不可用则返回
         Vector3 trans = transform.position; // 获取当前物体位置
         Vector3 playerPos = player.transform.position; // 玩家位置
-        InstantiateLine(playerPos, trans); // 实例化颜料
+        InstantiateLine(playerPos + new Vector3(0, 1.4f, 0), trans); // 实例化颜料
+        sphereCollider.enabled = false; // 禁用球形碰撞器
     }
 
     // 检测两条线段是否相交
