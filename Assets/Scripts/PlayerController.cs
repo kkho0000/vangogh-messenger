@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool isGround; // 判断是否在地面上
     Rigidbody rb;
     Animator animator; // 动画控制器
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,20 +28,20 @@ public class PlayerController : MonoBehaviour
     {
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis("Vertical");
-        
+
         speed = hor * moveSpeed; // 计算速度
         animator.SetFloat("speed", Mathf.Abs(speed)); // 设置动画参数
         if (hor != 0)
         {
-            if(isHolding)// 如果有持有状态
+            if (isHolding)// 如果有持有状态
             {
                 if ((startPoint.x - endPoint.x) * hor < 0) // 如果起点在终点的右侧
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, endPoint-offset, ropeSpeed * Time.deltaTime); // 控制角色朝向
+                    transform.position = Vector3.MoveTowards(transform.position, endPoint - offset, ropeSpeed * Time.deltaTime); // 控制角色朝向
                 }
                 else // 如果起点在终点的左侧
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, startPoint-offset, ropeSpeed * Time.deltaTime); // 控制角色朝向
+                    transform.position = Vector3.MoveTowards(transform.position, startPoint - offset, ropeSpeed * Time.deltaTime); // 控制角色朝向
                 }
             }
             else
@@ -54,6 +55,18 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse); // 添加跳跃力
             animator.SetTrigger("jump"); // 设置跳跃动画触发器
             isGround = false; // 设置在地面上为 false
+
+            // 分离移动和跳跃逻辑，先计算水平速度
+
+            // 统一设置刚体速度
+
+
+            speed = Mathf.Abs(hor * moveSpeed);
+            animator.SetFloat("speed", speed);
+            if (hor != 0)
+            {
+                transform.localScale = new Vector3(0.3f, 0.3f, hor > 0 ? 0.3f : -0.3f);
+            }
         }
     }
 
