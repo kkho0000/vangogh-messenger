@@ -119,4 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 2792833312325323563, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
+    type: 3}
