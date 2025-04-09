@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 endPoint; // 线段终点
     private Vector3 offset = new Vector3(0, 1.4f, 0);
     private bool isHolding = false;
+    private bool isGround; // 判断是否在地面上
     Rigidbody rb;
     Animator animator; // 动画控制器
     // Start is called before the first frame update
@@ -48,11 +49,17 @@ public class PlayerController : MonoBehaviour
             }
             transform.localScale = new Vector3(1f, 1f, hor > 0 ? 1f : -1f); // 控制角色朝向
         }
-        if (Input.GetKeyDown(KeyCode.Space)) // 检测跳跃
+        if (Input.GetKeyDown(KeyCode.Space) && isGround) // 检测跳跃
         {
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse); // 添加跳跃力
             animator.SetTrigger("jump"); // 设置跳跃动画触发器
+            isGround = false; // 设置在地面上为 false
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        isGround = true; // 检测是否在地面上
     }
 
     // 检测触发器
@@ -92,18 +99,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // private void OnTriggerExit(Collider other) {
-    //     // 检测是否是 "Player" 碰撞到 "Lines" 的子物体
-    //     if (other.CompareTag("Lines"))
-    //     {
-    //         if (isHolding) // 如果有持有状态
-    //         {
-    //             isHolding = false; // 设置持有状态为 false
-    //             animator.SetTrigger("release"); // 设置释放动画触发器
-    //             rb.isKinematic = false; // 设置刚体为非运动学
-    //         }
-    //     }
-    // }
 
     // 计算点到线段的最近点
     private Vector3 GetNearestPointOnLine(Vector3 start, Vector3 end, Vector3 point)
