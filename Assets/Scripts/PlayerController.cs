@@ -54,24 +54,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse); // 添加跳跃力
             animator.SetTrigger("jump"); // 设置跳跃动画触发器
             isGround = false; // 设置在地面上为 false
-
-        // 分离移动和跳跃逻辑，先计算水平速度
-        Vector3 horizontalVelocity = new Vector3(hor * moveSpeed, 0, 0);
-        // 处理跳跃逻辑
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            // 单独添加跳跃力，不与水平速度计算混淆
-            rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-            isGrounded = false;
-        }
-        // 统一设置刚体速度
-        rb.velocity = new Vector3(horizontalVelocity.x, rb.velocity.y, 0);
-
-        speed = Mathf.Abs(hor * moveSpeed);
-        animator.SetFloat("speed", speed);
-        if (hor != 0)
-        {
-            transform.localScale = new Vector3(0.3f, 0.3f, hor > 0 ? 0.3f : -0.3f);
         }
     }
 
