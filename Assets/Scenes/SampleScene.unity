@@ -1222,6 +1222,11 @@ PrefabInstance:
       propertyPath: targetObject
       value: 
       objectReference: {fileID: 1992003108}
+    - target: {fileID: 5233423901966790876, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
+        type: 3}
+      propertyPath: blackAndWhiteMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: d49539b57daae4a419c9c390fc409b90, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
