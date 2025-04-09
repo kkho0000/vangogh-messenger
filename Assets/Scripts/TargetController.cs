@@ -39,7 +39,6 @@ public class TargetController : MonoBehaviour
         // 计算变换后的 start 和 end 坐标
         lineData.startPoint = start; // 将局部坐标 start 转换为世界坐标
         lineData.endPoint = end; // 将局部坐标 end 转换为世界坐标
-        Debug.Log("start: " + lineData.startPoint + " end: " + lineData.endPoint); // 输出线段的起点和终点
         lineData.lineColor = originColor; // 设置线段的颜色
 
         // 设置线段的父物体为线段数组

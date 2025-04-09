@@ -81,7 +81,6 @@ public class PlayerController : MonoBehaviour
 
                         // 计算角色到线段的最近点
                         Vector3 nearestPoint = GetNearestPointOnLine(startPoint, endPoint, transform.position);
-                        Debug.Log("nearestPoint: " + nearestPoint); // 输出最近点
                         transform.position = nearestPoint - offset; // 设置角色位置为最近点
                         animator.SetTrigger("hold"); // 设置持有动画触发器
                         isHolding = true; // 设置持有状态为 true
