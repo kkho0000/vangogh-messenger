@@ -21,7 +21,7 @@ public class EnermyJump : MonoBehaviour
         timer += Time.deltaTime;
         
         // 水平方向移动
-        Vector3 direction = movingNegativeZ ? Vector3.forward : Vector3.back;
+        Vector3 direction = movingNegativeZ ? Vector3.right : Vector3.left;
         transform.Translate(direction * moveSpeed * Time.deltaTime);
 
         // 垂直方向弹跳，确保返回值在 0 到 1 之间
