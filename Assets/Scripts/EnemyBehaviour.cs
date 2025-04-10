@@ -14,7 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        Vector3 direction = movingNegativeZ ? Vector3.forward : Vector3.back;
+        Vector3 direction = movingNegativeZ ? Vector3.right : Vector3.left;
         transform.Translate(direction * moveSpeed * Time.deltaTime);
 
         if (timer >= moveDuration)
