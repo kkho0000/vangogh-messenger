@@ -17,7 +17,6 @@ public class WindEffect : MonoBehaviour
             {
                 // 给 Player 添加一个向上的力
                 playerRb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
-                Debug.Log("向 Player 施加了向上的力");
             }
         }
     }
