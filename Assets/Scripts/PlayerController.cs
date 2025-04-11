@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
             // 延迟 4 秒销毁子物体
             if (letter != null)
             {
-                Destroy(letter, 4f); // 5 秒后销毁子物体
+                Destroy(letter, 4f); // 4 秒后销毁子物体
             }
             rb.isKinematic = true;
             this.enabled = false;
