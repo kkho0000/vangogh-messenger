@@ -46,6 +46,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (player != null)
             {
                 collisionCount++;
+                Debug.Log(collisionCount);
                 if (collisionCount == 1)
                 {
                     player.isBlackAndWhite = false;
