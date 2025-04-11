@@ -50,7 +50,7 @@ public class TargetController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player"); // 获取玩家物体
         Lines = GameObject.FindGameObjectWithTag("Lines"); // 获取线段数组物体
         sphereCollider = GetComponent<SphereCollider>(); // 获取球形碰撞器组件
-        spawner = transform.parent.gameObject; // 获取生成器物体
+        //spawner = transform.parent.gameObject; // 获取生成器物体
     }
 
     void Update()
@@ -118,7 +118,7 @@ public class TargetController : MonoBehaviour
         if (!isAvaliable) return; // 如果不可用则返回
         Vector3 trans = transform.position; // 获取当前物体位置
         Vector3 playerPos = player.transform.position; // 玩家位置
-        InstantiateLine(playerPos + new Vector3(0, 1.4f, 0), trans); // 实例化颜料
+        InstantiateLine(playerPos + new Vector3(0, 1.4f, 0f), trans); // 实例化颜料
         sphereCollider.enabled = false; // 禁用球形碰撞器
     }
 

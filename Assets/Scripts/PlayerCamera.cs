@@ -10,31 +10,34 @@ using System.Runtime.Serialization.Formatters.Binary;
 [ExecuteInEditMode]
 public class PlayerCamera : MonoBehaviour
 {
-    public GameObject targetObject; // 要切换渲染效果的目标物体
-    public Material blackAndWhiteMaterial; // 黑白材质
-    private Material originalMaterial; // 原始材质
+    public GameObject[] targetObjects; // 要切换渲染效果的目标物体数组
+    public Material[] blackAndWhiteMaterials; // 黑白材质数组
+    private Material[] originalMaterials; // 原始材质数组
     public bool isBlackAndWhite = false;
-    //public Transform spawnPoint; // 复活点位置
-    //public string latestSaveFileName;
- 
-    public bool isDie=false;
+    public bool isDie = false;
+
     public void Die()
     {
         transform.position = GameManager.Instance.GetLastSavePosition();
         Debug.Log("Player respawned at the last save point.");
     }
+
     private void Start()
     {
-        
         Debug.Log("Player entered the save point.");
         GameManager.Instance.SetLastSavePosition(transform.position);
-        
-        MeshRenderer renderer = targetObject.GetComponent<MeshRenderer>();
-        if (renderer != null)
+
+        originalMaterials = new Material[targetObjects.Length];
+        for (int i = 0; i < targetObjects.Length; i++)
         {
-            originalMaterial = renderer.sharedMaterial;
+            SpriteRenderer renderer = targetObjects[i].GetComponent<SpriteRenderer>();
+            if (renderer != null)
+            {
+                originalMaterials[i] = renderer.sharedMaterial;
+            }
         }
     }
+
     private void Update()
     {
         if (isDie)
@@ -43,29 +46,24 @@ public class PlayerCamera : MonoBehaviour
             isDie = false;
         }
     }
+
     public void ToggleRender()
     {
-        MeshRenderer renderer = targetObject.GetComponent<MeshRenderer>();
-        if (renderer != null)
+        for (int i = 0; i < targetObjects.Length; i++)
         {
-            if (isBlackAndWhite)
+            SpriteRenderer renderer = targetObjects[i].GetComponent<SpriteRenderer>();
+            if (renderer != null)
             {
-                renderer.sharedMaterial = originalMaterial;
+                if (isBlackAndWhite)
+                {
+                    renderer.sharedMaterial = originalMaterials[i];
+                }
+                else
+                {
+                    renderer.sharedMaterial = blackAndWhiteMaterials[i];
+                }
             }
-            else
-            {
-                renderer.sharedMaterial = blackAndWhiteMaterial;
-            }
-            //isBlackAndWhite = !isBlackAndWhite;
         }
+        //isBlackAndWhite = !isBlackAndWhite; // 更新状态
     }
-
-    /*public void ReturnToSpawnPoint()
-    {
-        if (spawnPoint != null)
-        {
-            transform.position = spawnPoint.position;
-            transform.rotation = spawnPoint.rotation;
-        }
-    }*/
 }
