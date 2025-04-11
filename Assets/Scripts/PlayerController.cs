@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed; // 跳跃速度
     public float moveSpeed; // 
     public float ropeSpeed; // 线段速度
+    public GameObject letter;
     private float speed;
     private Vector3 startPoint; // 线段起点
     private Vector3 endPoint; // 线段终点
     private Vector3 offset = new Vector3(0, 1.4f, 0);
     private bool isHolding = false;
     private bool isGround; // 判断是否在地面上
+    private bool finish = false; // 判断是否完成
     Rigidbody rb;
     Animator animator; // 动画控制器
 
@@ -75,6 +77,26 @@ public class PlayerController : MonoBehaviour
         isGround = true; // 检测是否在地面上
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // 检测是否是 "Player" 碰撞到 "Lines" 的子物体
+        if (other.CompareTag("Finish") && !finish)
+        {
+            // 触发完成动画
+            finish = true; // 设置完成状态为 true
+            animator.SetTrigger("mail"); // 设置完成动画触发器
+            // 开始协程逐渐移动到目标位置
+            StartCoroutine(MoveToTarget(other.transform.position + new Vector3(-0.5f, -0.4f, 0)));
+            // 延迟 4 秒销毁子物体
+            if (letter != null)
+            {
+                Destroy(letter, 4f); // 5 秒后销毁子物体
+            }
+            rb.isKinematic = true;
+            this.enabled = false;
+        }
+    }
+
     // 检测触发器
     private void OnTriggerStay(Collider other)
     {
@@ -130,5 +152,24 @@ public class PlayerController : MonoBehaviour
 
         // 计算最近点的位置
         return start + lineDirection * projectionLength;
+    }
+
+    // 协程：逐渐移动到目标位置
+    private IEnumerator MoveToTarget(Vector3 targetPosition)
+    {
+        float duration = 2f; // 移动持续时间
+        float elapsedTime = 0f;
+        Vector3 startingPosition = transform.position;
+
+        while (elapsedTime < duration)
+        {
+            // 逐渐移动到目标位置
+            transform.position = Vector3.Lerp(startingPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null; // 等待下一帧
+        }
+
+        // 确保最终位置精确到目标位置
+        transform.position = targetPosition;
     }
 }
