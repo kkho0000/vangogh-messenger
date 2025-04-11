@@ -33,6 +33,7 @@ public class TargetController : MonoBehaviour
         line.transform.position = center;
         line.transform.rotation = Quaternion.LookRotation(direction);
         line.transform.Rotate(-90, 0, 0); // 调整为 y 轴对齐到方向
+        line.transform.Rotate(0, 90, 0); // 调整为 x 轴对齐到方向
 
         // 设置线段数据
         LineData lineData = line.GetComponent<LineData>();

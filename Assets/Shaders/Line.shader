@@ -9,6 +9,7 @@ Shader "Custom/LineShader"
         _UVScale ("UV Scale", Vector) = (1, 1, 0, 0)
         _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
         _OutlineWidth ("Outline Width", Float) = 0.03
+        _DynamicUV ("Dynamic UV", Float) = 0.0
     }
 
     SubShader
@@ -90,6 +91,7 @@ Shader "Custom/LineShader"
             sampler2D _CanvasTex;
             float4 _MainColor;
             float _BrushStrength;
+            float _DynamicUV;
             float4 _UVScale;
 
             v2f vert (appdata v)
@@ -103,7 +105,7 @@ Shader "Custom/LineShader"
             fixed4 frag (v2f i) : SV_Target
             {
                 // 动态修改 UV，添加时间变化
-                float2 animatedUV = i.uv + float2(0, _Time.y * 0.1);
+                float2 animatedUV = i.uv + float2(0, _Time.y * _DynamicUV);
 
                 // 采样 Brush Noise 纹理
                 fixed4 brushNoise = tex2D(_BrushNoise, animatedUV);

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4126026870457772701}
   - component: {fileID: 6760266365884766921}
   - component: {fileID: 1172885230837703344}
+  - component: {fileID: 7815527561422436286}
+  - component: {fileID: 5503773515440725102}
   m_Layer: 0
   m_Name: wind
   m_TagString: Untagged
@@ -106,3 +108,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7815527561422436286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8789894893106337661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7787d8df138acaa499295c6920c05685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upwardForce: 0.1
+--- !u!65 &5503773515440725102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8789894893106337661}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.680801, y: 41.750004, z: 6.56731}
+  m_Center: {x: -0.0077869305, y: 0, z: 0.014678131}
