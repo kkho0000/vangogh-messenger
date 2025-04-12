@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277b2f1fbbe29444798dd72f90250d62, type: 3}
+  m_Name: Wind1
+  m_EditorClassIdentifier: 
+  sequenceAudio: {fileID: 8300000, guid: fc446b43e7163dc4cb18f634af63e054, type: 3}
+  entries:
+  - text: Dear Theo,
+    startTime: 0
+    duration: 1
+  - text: 'which reached me in good order.Thanks very much for the consignment of
+      canvases, colours, brushes, tobacco and chocolate, '
+    startTime: 1
+    duration: 9
+  - text: "which reached me in good order.\r\r"
+    startTime: 10
+    duration: 2

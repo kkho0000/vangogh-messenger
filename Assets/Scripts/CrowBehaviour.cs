@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CrowBehaviour : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3f;
+    public float moveDuration = 2.2f;
+    public Vector3 initialDirection = Vector3.right; // 初始飞行方向
     private float timer = 0f;
-    private const float moveDuration = 2.2f;
     private bool movingNegativeZ = true;
     private Rigidbody rb;
 
@@ -19,7 +20,7 @@ public class CrowBehaviour : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        Vector3 direction = movingNegativeZ ? Vector3.right : Vector3.left;
+        Vector3 direction = movingNegativeZ ? initialDirection : -initialDirection;
         // transform.Translate(direction * moveSpeed * Time.deltaTime);
         rb.velocity = direction * moveSpeed;
 
