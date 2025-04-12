@@ -4244,7 +4244,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 395583647}
   - {fileID: 1075363732}
   - {fileID: 1221762337}
   - {fileID: 1185616537}
@@ -9336,7 +9335,7 @@ PrefabInstance:
     - target: {fileID: 8106643096276416290, guid: a9ab47d2dde20f948bc06f45baa45654,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.72
+      value: -9.48
       objectReference: {fileID: 0}
     - target: {fileID: 8106643096276416290, guid: a9ab47d2dde20f948bc06f45baa45654,
         type: 3}
@@ -9705,7 +9704,7 @@ PrefabInstance:
       propertyPath: isBlackAndWhite
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5233423901966790876, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
+          - target: {fileID: 5233423901966790876, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
         type: 3}
       propertyPath: blackAndWhiteMaterial
       value: 
