@@ -849,7 +849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a7f3bc4a154fd4a9ea635b9aad3c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 8
+  jumpSpeed: 6.5
   moveSpeed: 3
   ropeSpeed: 1
   letter: {fileID: 7320397670716989764}
@@ -899,9 +899,13 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1cf83a906dcf4084daa9394b8ee0ce4b, type: 2}
   - {fileID: 2100000, guid: b006715881f2d5043b34ea70ff4d7f36, type: 2}
   - {fileID: 2100000, guid: 6c9e144c24bd0894db90177dbcb9cf7e, type: 2}
-  - {fileID: 2100000, guid: a514999f74da31f4cbc47b79fe932673, type: 2}
+  - {fileID: 2100000, guid: fc792c90edafa3846b88882d0e219ff1, type: 2}
   isBlackAndWhite: 1
   isDie: 0
+  blackScreen: {fileID: 0}
+  virtualCamera: {fileID: 0}
+  confiner: {fileID: 0}
+  settlementUI: {fileID: 0}
 --- !u!1 &2893829783490024941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,7 +1312,7 @@ Transform:
   m_GameObject: {fileID: 4761868897722495208}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 3.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
