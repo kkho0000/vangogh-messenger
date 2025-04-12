@@ -4,7 +4,7 @@ public class TargetController : MonoBehaviour
 {
     public GameObject prefab; // 颜料预制体
     public Color originColor;
-
+    private bool _uiClick=false;
     private GameObject Lines; // 线段数组
     private GameObject player; // 玩家物体
     private GameObject spawner; // 生成器物体
@@ -85,6 +85,7 @@ public class TargetController : MonoBehaviour
         // 检测鼠标点击
         if (isMouseOver && Input.GetMouseButtonDown(0)) // 鼠标左键点击
         {
+            
             HandleMouseDown(); // 调用鼠标点击逻辑
         }
     }
@@ -121,6 +122,12 @@ public class TargetController : MonoBehaviour
         Vector3 playerPos = player.transform.position; // 玩家位置
         InstantiateLine(playerPos + new Vector3(0, 1.4f, 0f), trans); // 实例化颜料
         sphereCollider.enabled = false; // 禁用球形碰撞器
+        _uiClick = true;
+    }
+    public bool uiClick
+    {
+        get { return _uiClick; }
+        set { _uiClick = value; }
     }
 
     // 检测两条线段是否相交
