@@ -27,7 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (!player.isBlackAndWhite)
         {
             timer1 += Time.deltaTime;
-            if (timer1 >= 3f)
+            if (timer1 >= 1f)
             {
                 player.isBlackAndWhite = true;
                 player.ToggleRender();
