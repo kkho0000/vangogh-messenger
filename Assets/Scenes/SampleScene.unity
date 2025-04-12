@@ -8785,6 +8785,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 729460442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.338}
+--- !u!1 &2049970140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5835794477693511653, guid: ac1239d3c33ce474c8f1ddec0e9646be,
+    type: 3}
+  m_PrefabInstance: {fileID: 1698627081}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2086035646
 GameObject:
   m_ObjectHideFlags: 0
@@ -9704,7 +9710,7 @@ PrefabInstance:
       propertyPath: isBlackAndWhite
       value: 1
       objectReference: {fileID: 0}
-          - target: {fileID: 5233423901966790876, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
+    - target: {fileID: 5233423901966790876, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
         type: 3}
       propertyPath: blackAndWhiteMaterial
       value: 
@@ -9734,6 +9740,16 @@ PrefabInstance:
       propertyPath: targetObjects.Array.data[4]
       value: 
       objectReference: {fileID: 738467076}
+    - target: {fileID: 5233423901966790876, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
+        type: 3}
+      propertyPath: targetObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 2049970140}
+    - target: {fileID: 5233423901966790876, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
+        type: 3}
+      propertyPath: blackAndWhiteMaterials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b21b46964c13ba44b7d806c56f60eaf, type: 2}
     - target: {fileID: 6478605116141143314, guid: 4ccd52a46e4e2f54eac3376ad3b414f7,
         type: 3}
       propertyPath: letter
@@ -10064,3 +10080,4 @@ SceneRoots:
   - {fileID: 495639428}
   - {fileID: 1732636177}
   - {fileID: 1428698530}
+  - {fileID: 1451327}
