@@ -86,7 +86,8 @@ public class PlayerController : MonoBehaviour
             finish = true; // 设置完成状态为 true
             animator.SetTrigger("mail"); // 设置完成动画触发器
             // 开始协程逐渐移动到目标位置
-            //StartCoroutine(MoveToTarget(other.transform.position + new Vector3(-0.5f, -0.4f, 0)));
+            transform.position = other.transform.position + new Vector3(-0.5f, -0.75f, 0);
+            //StartCoroutine(MoveToTarget(other.transform.position + new Vector3(-0.5f, -0.75f, 0)));
             // 延迟 4 秒销毁子物体
             if (letter != null)
             {
