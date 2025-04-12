@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277b2f1fbbe29444798dd72f90250d62, type: 3}
+  m_Name: L3checkpoint6
+  m_EditorClassIdentifier: 
+  sequenceAudio: {fileID: 8300000, guid: fc4ebb3bf3e3f4a4fa38d8df48b82935, type: 3}
+  entries:
+  - text: 'Also, for a few days now I''ve been going outside to work in the neighbourhood.
+
+'
+    startTime: 0
+    duration: 3
+  - text: 'What a beautiful land and what beautiful blue and what a sun.
+
+'
+    startTime: 3
+    duration: 4
+  - text: 'So then my brush goes between my fingers as if it were the bow on a violin
+      and
+
+'
+    startTime: 7
+    duration: 4
+  - text: "absolutely for my pleasure.\r"
+    startTime: 11
+    duration: 2
