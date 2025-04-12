@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277b2f1fbbe29444798dd72f90250d62, type: 3}
   m_Name: Intro_subtitle
   m_EditorClassIdentifier: 
+  sequenceAudio: {fileID: 8300000, guid: 8ce63b0eac068f346a8912c320162557, type: 3}
   entries:
   - text: My dear Theo, where can I go that's worse than where I've already been?
-    duration: 7
-    delayBefore: 0
+    startTime: 1
+    duration: 6
   - text: Shut up for long days under lock and key and in the isolation cell.
+    startTime: 6
     duration: 5
-    delayBefore: 0

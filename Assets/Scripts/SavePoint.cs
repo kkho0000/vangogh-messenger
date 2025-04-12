@@ -4,7 +4,7 @@ using UnityEngine;
 public class SavePoint : MonoBehaviour
 {
 
-    [SerializeField] private SubtitleSequenceData sequenceData;
+    //[SerializeField] private SubtitleSequenceData sequenceData;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,7 +13,7 @@ public class SavePoint : MonoBehaviour
             Debug.Log("Player entered the save point.");
             GameManager.Instance.SetLastSavePosition(transform.position);
 
-            SubtitleManager.Instance.PlaySequence(sequenceData);
+            //SubtitleManager.Instance.PlaySequence(sequenceData);
         }
     }
 }
