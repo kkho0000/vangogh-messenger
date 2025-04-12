@@ -12,7 +12,7 @@ public class PlayerCamera : MonoBehaviour
 {
     public GameObject[] targetObjects; // 要切换渲染效果的目标物体数组
     public Material[] blackAndWhiteMaterials; // 黑白材质数组
-    private Material[] originalMaterials; // 原始材质数组
+    private Material[][] originalMaterials; // 原始材质数组，二维数组以兼容不同渲染器
     public bool isBlackAndWhite = false;
     public bool isDie = false;
 
@@ -27,13 +27,19 @@ public class PlayerCamera : MonoBehaviour
         Debug.Log("Player entered the save point.");
         GameManager.Instance.SetLastSavePosition(transform.position);
 
-        originalMaterials = new Material[targetObjects.Length];
+        originalMaterials = new Material[targetObjects.Length][];
         for (int i = 0; i < targetObjects.Length; i++)
         {
-            SpriteRenderer renderer = targetObjects[i].GetComponent<SpriteRenderer>();
-            if (renderer != null)
+            SpriteRenderer spriteRenderer = targetObjects[i].GetComponent<SpriteRenderer>();
+            MeshRenderer meshRenderer = targetObjects[i].GetComponent<MeshRenderer>();
+
+            if (spriteRenderer != null)
             {
-                originalMaterials[i] = renderer.sharedMaterial;
+                originalMaterials[i] = new Material[1] { spriteRenderer.sharedMaterial };
+            }
+            else if (meshRenderer != null)
+            {
+                originalMaterials[i] = meshRenderer.sharedMaterials;
             }
         }
     }
@@ -51,17 +57,35 @@ public class PlayerCamera : MonoBehaviour
     {
         for (int i = 0; i < targetObjects.Length; i++)
         {
-            SpriteRenderer renderer = targetObjects[i].GetComponent<SpriteRenderer>();
-            if (renderer != null)
+            SpriteRenderer spriteRenderer = targetObjects[i].GetComponent<SpriteRenderer>();
+            MeshRenderer meshRenderer = targetObjects[i].GetComponent<MeshRenderer>();
+
+            if (spriteRenderer != null)
             {
                 if (isBlackAndWhite)
                 {
-                    renderer.sharedMaterial = originalMaterials[i];
+                    spriteRenderer.sharedMaterial = originalMaterials[i][0];
                 }
                 else
                 {
-                    renderer.sharedMaterial = blackAndWhiteMaterials[i];
+                    spriteRenderer.sharedMaterial = blackAndWhiteMaterials[i];
                 }
+            }
+            else if (meshRenderer != null)
+            {
+                Material[] materialsToApply = new Material[meshRenderer.sharedMaterials.Length];
+                if (isBlackAndWhite)
+                {
+                    materialsToApply = originalMaterials[i];
+                }
+                else
+                {
+                    for (int j = 0; j < materialsToApply.Length; j++)
+                    {
+                        materialsToApply[j] = blackAndWhiteMaterials[i];
+                    }
+                }
+                meshRenderer.sharedMaterials = materialsToApply;
             }
         }
         //isBlackAndWhite = !isBlackAndWhite; // 更新状态
