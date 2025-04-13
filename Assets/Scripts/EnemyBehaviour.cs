@@ -6,7 +6,6 @@ public class EnemyBehaviour : MonoBehaviour
     private float timer = 0f;
     private const float moveDuration = 3f;
     private bool movingNegativeZ = true;
-    private int collisionCount = 0; // 记录碰撞次数
     private float timer1 = 0f;
     public GameObject playerObject;
 
@@ -32,35 +31,11 @@ public class EnemyBehaviour : MonoBehaviour
                 player.isBlackAndWhite = true;
                 player.ToggleRender();
                 timer1 = 0f;
-                collisionCount = 0;
+                player.collisionCount = 0;
             }
 
         }
+        
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerCamera player = other.GetComponent<PlayerCamera>();
-            if (player != null)
-            {
-                collisionCount++;
-                Debug.Log(collisionCount);
-                if (collisionCount == 1)
-                {
-                    player.isBlackAndWhite = false;
-                    player.ToggleRender();
-                }
-                else if (collisionCount == 2)
-                {
-                    player.isBlackAndWhite = true;
-                    player.ToggleRender();
-                    player.Die();
-                    //player.ReturnToSpawnPoint();
-                    collisionCount = 0; // 重置碰撞次数
-                }
-            }
-        }
-    }
 }
