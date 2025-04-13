@@ -13,9 +13,9 @@ public class SubtitleTrigger : MonoBehaviour
             SubtitleManager.Instance.PlaySequence(sequenceData);
             if (triggerOnce)
             {
-                hasTriggered = true;
-                GetComponent<Collider>().enabled = false; // 禁用触发器
+                hasTriggered = true; // 设置为已触发
             }
         }
     }
 }
+
