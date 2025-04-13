@@ -3,6 +3,10 @@ Shader "Custom/BlackAndWhiteShader" {
         _MainTex ("Base (RGB)", 2D) = "white" {}
     }
     SubShader {
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+        LOD 100
+        Blend SrcAlpha OneMinusSrcAlpha
+
         Pass {
             CGPROGRAM
             #pragma vertex vert
@@ -38,4 +42,4 @@ Shader "Custom/BlackAndWhiteShader" {
         }
     }
     FallBack "Diffuse"
-}
+}    
