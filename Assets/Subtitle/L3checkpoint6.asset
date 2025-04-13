@@ -23,13 +23,13 @@ MonoBehaviour:
 
 '
     startTime: 3
-    duration: 4
+    duration: 6
   - text: 'So then my brush goes between my fingers as if it were the bow on a violin
       and
 
 '
-    startTime: 7
+    startTime: 9
     duration: 4
   - text: "absolutely for my pleasure.\r"
-    startTime: 11
-    duration: 2
+    startTime: 13
+    duration: 3

@@ -12,8 +12,6 @@ public class SavePoint : MonoBehaviour
         {
             Debug.Log("Player entered the save point.");
             GameManager.Instance.SetLastSavePosition(transform.position);
-
-            //SubtitleManager.Instance.PlaySequence(sequenceData);
         }
     }
 }
