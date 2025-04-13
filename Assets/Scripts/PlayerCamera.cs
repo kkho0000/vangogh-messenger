@@ -22,6 +22,8 @@ public class PlayerCamera : MonoBehaviour
     Animator animator;
     public GameObject confiner;
     public GameObject settlementUI; // 结算 UI 界面的 GameObject
+    private int _collisionCount = 0; // 记录碰撞次数
+    private bool interactionHandled = false;
     public void Die()
     {
         transform.position = GameManager.Instance.GetLastSavePosition();
@@ -60,7 +62,64 @@ public class PlayerCamera : MonoBehaviour
         }
 
     }
+    public int collisionCount { 
+        get { return _collisionCount; } 
+        set { _collisionCount = value; }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enermy"))
+        {
+            if (!interactionHandled)
+            {
+                Debug.Log("触发事件: 与 " + other.gameObject.name + " 触发");
+                interactionHandled = true;
+                _collisionCount++;
+                Debug.Log(collisionCount);
+                if (_collisionCount == 1)
+                {
+                    isBlackAndWhite = false;
+                    ToggleRender();
+                }
+                else if (_collisionCount == 2)
+                {
+                    isBlackAndWhite = true;
+                    ToggleRender();
+                    Die();
+                    //player.ReturnToSpawnPoint();
+                    _collisionCount = 0; // 重置碰撞次数
+                }
+                
 
+
+            }
+        }
+        if (other.CompareTag("End")) // 假设终点标签为 "End"
+        {
+            StartCoroutine(TriggerEndScene());
+            Destroy(other.gameObject);
+        }
+
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!interactionHandled)
+        {
+            // 在这里添加碰撞时要执行的逻辑
+            //Debug.Log("碰撞事件: 与 " + collision.gameObject.name + " 碰撞");
+            interactionHandled = true;
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        interactionHandled = false;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        interactionHandled = false;
+    }
     public void ToggleRender()
     {
         for (int i = 0; i < targetObjects.Length; i++)
@@ -124,12 +183,6 @@ public class PlayerCamera : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("End")) // 假设终点标签为 "End"
-        {
-            StartCoroutine(TriggerEndScene());
-            Destroy(other.gameObject);
-        }
-    }
+
+
 }
