@@ -12,31 +12,31 @@ using System.Collections;
 public class PlayerCamera : MonoBehaviour
 {
     
-    public GameObject[] targetObjects; // Ҫ�л���ȾЧ����Ŀ����������
-    public Material[] blackAndWhiteMaterials; // �ڰײ�������
-    private Material[][] originalMaterials; // ԭʼ�������飬��ά�����Լ��ݲ�ͬ��Ⱦ��
+    public GameObject[] targetObjects; // 要切换渲染效果的目标物体数组
+    public Material[] blackAndWhiteMaterials; // 黑白材质数组
+    private Material[][] originalMaterials; // 原始材质数组，二维数组以兼容不同渲染器
     public bool isBlackAndWhite = false;
     public bool isDie = false;
     public Image blackScreen;
     public CinemachineVirtualCamera virtualCamera;
     Animator animator;
     public GameObject confiner;
-    public GameObject settlementUI; // ���� UI ����� GameObject
-    private int _collisionCount = 0; // ��¼��ײ����
+    public GameObject settlementUI; // 结算 UI 界面的 GameObject
+    private int _collisionCount = 0; // 记录碰撞次数
     private bool interactionHandled = false;
     public void Die()
     {
         transform.position = GameManager.Instance.GetLastSavePosition(); 
         Debug.Log("Player respawned at the last save point.");
 
-        // ��ȡ PlayerController ���������״̬
+        // 获取 PlayerController 组件并重置状态
         PlayerController playerController = GetComponent<PlayerController>();
         if (playerController != null)
         {
             playerController.ResetPlayerState();
-            // ��������״̬
+            // 重置其他状态
             isBlackAndWhite = false;
-            ToggleRender(); // ������ȾЧ��
+            ToggleRender(); // 重置渲染效果
 
         }
     }
@@ -83,7 +83,7 @@ public class PlayerCamera : MonoBehaviour
         {
             if (!interactionHandled)
             {
-                Debug.Log("�����¼�: �� " + other.gameObject.name + " ����");
+                Debug.Log("触发事件: 与 " + other.gameObject.name + " 触发");
                 interactionHandled = true;
                 _collisionCount++;
                 Debug.Log(collisionCount);
@@ -98,14 +98,14 @@ public class PlayerCamera : MonoBehaviour
                     ToggleRender();
                     Die();
                     //player.ReturnToSpawnPoint();
-                    _collisionCount = 0; // ������ײ����
+                    _collisionCount = 0; // 重置碰撞次数
                 }
                 
 
 
             }
         }
-        if (other.CompareTag("End")) // �����յ��ǩΪ "End"
+        if (other.CompareTag("End")) // 假设终点标签为 "End"
         {
             StartCoroutine(TriggerEndScene());
             Destroy(other.gameObject);
@@ -116,8 +116,8 @@ public class PlayerCamera : MonoBehaviour
     {
         if (!interactionHandled)
         {
-            // ������������ײʱҪִ�е��߼�
-            //Debug.Log("��ײ�¼�: �� " + collision.gameObject.name + " ��ײ");
+            // 在这里添加碰撞时要执行的逻辑
+            //Debug.Log("碰撞事件: 与 " + collision.gameObject.name + " 碰撞");
             interactionHandled = true;
         }
         
@@ -166,22 +166,22 @@ public class PlayerCamera : MonoBehaviour
                 meshRenderer.sharedMaterials = materialsToApply;
             }
         }
-        //isBlackAndWhite = !isBlackAndWhite; // ����״̬
+        //isBlackAndWhite = !isBlackAndWhite; // 更新状态
     }
 
     private IEnumerator TriggerEndScene()
     {
-        blackScreen.gameObject.SetActive(true); // ��ʾ����
-        yield return new WaitForSeconds(0.8f); // �������� 1 ��
+        blackScreen.gameObject.SetActive(true); // 显示黑屏
+        yield return new WaitForSeconds(0.8f); // 黑屏持续 1 秒
         GameObject finishObject = GameObject.FindWithTag("Finish");
         virtualCamera.m_Lens.OrthographicSize = 1.8f;
         confiner.SetActive(false);
-        blackScreen.gameObject.SetActive(false); // �رպ���
+        blackScreen.gameObject.SetActive(false); // 关闭黑屏
         
         
         yield return new WaitForSeconds(5f);
 
-        // ������� UI ����
+        // 激活结算 UI 界面
         if (settlementUI != null)
         {
             settlementUI.SetActive(true);
