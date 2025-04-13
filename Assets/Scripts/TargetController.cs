@@ -87,7 +87,7 @@ public class TargetController : MonoBehaviour
         {
             HandleMouseDown(); // 调用鼠标点击逻辑
         }
-        if (isMouseOver && Input.GetMouseButtonDown(1)) // 鼠标左键释放
+        if (isMouseOver && Input.GetMouseButtonDown(1)) // 鼠标右键点击
         {
             targetData.Reset(); // 重置目标数据
         }
