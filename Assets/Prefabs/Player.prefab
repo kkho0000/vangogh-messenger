@@ -813,7 +813,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &9036273896492802693
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -899,7 +899,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1cf83a906dcf4084daa9394b8ee0ce4b, type: 2}
   - {fileID: 2100000, guid: b006715881f2d5043b34ea70ff4d7f36, type: 2}
   - {fileID: 2100000, guid: 6c9e144c24bd0894db90177dbcb9cf7e, type: 2}
-  - {fileID: 2100000, guid: fc792c90edafa3846b88882d0e219ff1, type: 2}
+  - {fileID: 2100000, guid: 0b21b46964c13ba44b7d806c56f60eaf, type: 2}
   isBlackAndWhite: 1
   isDie: 0
   blackScreen: {fileID: 0}

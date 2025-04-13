@@ -12,9 +12,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPoint; // 线段起点
     private Vector3 endPoint; // 线段终点
     private Vector3 offset = new Vector3(0, 1.4f, 0);
-    private bool isHolding = false;
+    private bool isHolding = false; // 是否持有线段
     private bool isGround; // 判断是否在地面上
     private bool finish = false; // 判断是否完成
+    
+    private LineData lineData; // 线段数据
     Rigidbody rb;
     Animator animator; // 动画控制器
 
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour
         // 检测是否是 "Player" 碰撞到 "Lines" 的子物体
         if (other.CompareTag("Lines"))
         {
-            LineData lineData = other.GetComponent<LineData>();
+            lineData = other.GetComponent<LineData>();
             // 如果按下 Shift 键，将角色位置重置到线段的中心
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -107,6 +109,7 @@ public class PlayerController : MonoBehaviour
                         transform.position = nearestPoint - offset; // 设置角色位置为最近点
                         animator.SetTrigger("hold"); // 设置持有动画触发器
                         isHolding = true; // 设置持有状态为 true
+                        lineData.SetOnHold(); // 设置线段为持有状态
                         rb.velocity = Vector3.zero; // 停止角色的运动
                         rb.isKinematic = true; // 设置刚体为运动学
                     }
@@ -114,11 +117,22 @@ public class PlayerController : MonoBehaviour
             }
             else if (isHolding)
             {
-                isHolding = false; // 设置持有状态为 false
-                animator.SetTrigger("release"); // 设置释放动画触发器
-                rb.isKinematic = false; // 设置刚体为非运动学
+                // 如果没有按下 Shift 键，重置持有状态
+                ResetHoldingState(); // 重置持有状态
             }
         }
+    }
+
+    // 重置持有状态的方法
+    public void ResetHoldingState()
+    {
+        isHolding = false; // 设置持有状态为 false
+        if (lineData != null)
+        {
+            lineData.Release(); // 释放线段
+        }
+        animator.SetTrigger("release"); // 设置释放动画触发器
+        rb.isKinematic = false; // 设置刚体为非运动学
     }
 
 

@@ -4955,3 +4955,4 @@ MonoBehaviour:
   endPoint: {x: 0, y: 0, z: 0}
   lineColor: {r: 0, g: 0, b: 0, a: 0}
   lineWidth: 0
+  Player: {fileID: 0}
