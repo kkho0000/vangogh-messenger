@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed; // 移动速度
     public float ropeSpeed; // 线段速度
     public GameObject letter;
+    public FullscreenDissolveFeature dissolveFeature;
     private float speed;
     private Vector3 startPoint; // 线段起点
     private Vector3 endPoint; // 线段终点
@@ -75,8 +76,9 @@ public class PlayerController : MonoBehaviour
             // 触发完成动画
             finish = true; // 设置完成状态为 true
             animator.SetTrigger("mail"); // 设置完成动画触发器
-            // 开始协程逐渐移动到目标位置
-            transform.position = other.transform.position + new Vector3(-0.5f, -0.75f, 0);
+            dissolveFeature.TriggerDissolve(); // 设置融化值
+            // 开始协程移动到目标位置
+            StartCoroutine(SetPositionAfterDelay(other));
             // 延迟 4 秒销毁子物体
             if (letter != null)
             {
@@ -173,6 +175,12 @@ public class PlayerController : MonoBehaviour
 
         // 确保最终位置精确到目标位置
         transform.position = targetPosition;
+    }
+
+    private IEnumerator SetPositionAfterDelay(Collider other)
+    {
+        yield return new WaitForSeconds(1f); // 等待 1 秒
+        transform.position = other.transform.position + new Vector3(-0.5f, -0.75f, 0); // 设置位置
     }
 
     public void ResetPlayerState()
