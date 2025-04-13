@@ -12,30 +12,31 @@ using System.Collections;
 public class PlayerCamera : MonoBehaviour
 {
     
-    public GameObject[] targetObjects; // ÒªÇĞ»»äÖÈ¾Ğ§¹ûµÄÄ¿±êÎïÌåÊı×é
-    public Material[] blackAndWhiteMaterials; // ºÚ°×²ÄÖÊÊı×é
-    private Material[][] originalMaterials; // Ô­Ê¼²ÄÖÊÊı×é£¬¶şÎ¬Êı×éÒÔ¼æÈİ²»Í¬äÖÈ¾Æ÷
+    public GameObject[] targetObjects; // è¦åˆ‡æ¢æ¸²æŸ“æ•ˆæœçš„ç›®æ ‡ç‰©ä½“æ•°ç»„
+    public Material[] blackAndWhiteMaterials; // é»‘ç™½æè´¨æ•°ç»„
+    private Material[][] originalMaterials; // åŸå§‹æè´¨æ•°ç»„ï¼ŒäºŒç»´æ•°ç»„ä»¥å…¼å®¹ä¸åŒæ¸²æŸ“å™¨
     public bool isBlackAndWhite = false;
     public bool isDie = false;
     public Image blackScreen;
     public CinemachineVirtualCamera virtualCamera;
     Animator animator;
     public GameObject confiner;
-    public GameObject settlementUI; // ½áËã UI ½çÃæµÄ GameObject
-
+    public GameObject settlementUI; // ç»“ç®— UI ç•Œé¢çš„ GameObject
+    private int _collisionCount = 0; // è®°å½•ç¢°æ’æ¬¡æ•°
+    private bool interactionHandled = false;
     public void Die()
     {
         transform.position = GameManager.Instance.GetLastSavePosition(); 
         Debug.Log("Player respawned at the last save point.");
 
-        // »ñÈ¡ PlayerController ×é¼ş²¢ÖØÖÃ×´Ì¬
+        // è·å– PlayerController ç»„ä»¶å¹¶é‡ç½®çŠ¶æ€
         PlayerController playerController = GetComponent<PlayerController>();
         if (playerController != null)
         {
             playerController.ResetPlayerState();
-            // ÖØÖÃÆäËû×´Ì¬
+            // é‡ç½®å…¶ä»–çŠ¶æ€
             isBlackAndWhite = false;
-            ToggleRender(); // ÖØÖÃäÖÈ¾Ğ§¹û
+            ToggleRender(); // é‡ç½®æ¸²æŸ“æ•ˆæœ
 
         }
     }
@@ -72,7 +73,64 @@ public class PlayerCamera : MonoBehaviour
         }
 
     }
+    public int collisionCount { 
+        get { return _collisionCount; } 
+        set { _collisionCount = value; }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enermy"))
+        {
+            if (!interactionHandled)
+            {
+                Debug.Log("è§¦å‘äº‹ä»¶: ä¸ " + other.gameObject.name + " è§¦å‘");
+                interactionHandled = true;
+                _collisionCount++;
+                Debug.Log(collisionCount);
+                if (_collisionCount == 1)
+                {
+                    isBlackAndWhite = false;
+                    ToggleRender();
+                }
+                else if (_collisionCount == 2)
+                {
+                    isBlackAndWhite = true;
+                    ToggleRender();
+                    Die();
+                    //player.ReturnToSpawnPoint();
+                    _collisionCount = 0; // é‡ç½®ç¢°æ’æ¬¡æ•°
+                }
+                
 
+
+            }
+        }
+        if (other.CompareTag("End")) // å‡è®¾ç»ˆç‚¹æ ‡ç­¾ä¸º "End"
+        {
+            StartCoroutine(TriggerEndScene());
+            Destroy(other.gameObject);
+        }
+
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!interactionHandled)
+        {
+            // åœ¨è¿™é‡Œæ·»åŠ ç¢°æ’æ—¶è¦æ‰§è¡Œçš„é€»è¾‘
+            //Debug.Log("ç¢°æ’äº‹ä»¶: ä¸ " + collision.gameObject.name + " ç¢°æ’");
+            interactionHandled = true;
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        interactionHandled = false;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        interactionHandled = false;
+    }
     public void ToggleRender()
     {
         for (int i = 0; i < targetObjects.Length; i++)
@@ -108,22 +166,22 @@ public class PlayerCamera : MonoBehaviour
                 meshRenderer.sharedMaterials = materialsToApply;
             }
         }
-        //isBlackAndWhite = !isBlackAndWhite; // ¸üĞÂ×´Ì¬
+        //isBlackAndWhite = !isBlackAndWhite; // æ›´æ–°çŠ¶æ€
     }
 
     private IEnumerator TriggerEndScene()
     {
-        blackScreen.gameObject.SetActive(true); // ÏÔÊ¾ºÚÆÁ
-        yield return new WaitForSeconds(0.8f); // ºÚÆÁ³ÖĞø 1 Ãë
+        blackScreen.gameObject.SetActive(true); // æ˜¾ç¤ºé»‘å±
+        yield return new WaitForSeconds(0.8f); // é»‘å±æŒç»­ 1 ç§’
         GameObject finishObject = GameObject.FindWithTag("Finish");
         virtualCamera.m_Lens.OrthographicSize = 1.8f;
         confiner.SetActive(false);
-        blackScreen.gameObject.SetActive(false); // ¹Ø±ÕºÚÆÁ
+        blackScreen.gameObject.SetActive(false); // å…³é—­é»‘å±
         
         
         yield return new WaitForSeconds(5f);
 
-        // ¼¤»î½áËã UI ½çÃæ
+        // æ¿€æ´»ç»“ç®— UI ç•Œé¢
         if (settlementUI != null)
         {
             settlementUI.SetActive(true);
@@ -136,12 +194,6 @@ public class PlayerCamera : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("End")) // ¼ÙÉèÖÕµã±êÇ©Îª "End"
-        {
-            StartCoroutine(TriggerEndScene());
-            Destroy(other.gameObject);
-        }
-    }
+
+
 }
