@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 605678185889868644}
   - component: {fileID: 9029505853439422363}
   - component: {fileID: 984092546602850351}
+  - component: {fileID: 8832489857328651306}
+  - component: {fileID: 3558408581733125557}
   m_Layer: 0
   m_Name: EnermyLine
-  m_TagString: Untagged
+  m_TagString: Enermy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.05, y: 0.79, z: 4.4}
-  m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
+  m_LocalScale: {x: 0.14, y: 0.14, z: 0.14}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,7 +117,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8742289253552401327}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1828c0f3f338f3e47829c011b33eb713, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -127,8 +129,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6.765
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 4.019555
+  m_Center: {x: -0.25900432, y: -0.15540293, z: 0}
 --- !u!114 &984092546602850351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +145,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   playerObject: {fileID: 0}
+--- !u!54 &8832489857328651306
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8742289253552401327}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &3558408581733125557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8742289253552401327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273d4174eef077f4a9b1a1843c8c0577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerOnce: 0
+  sequenceData: {fileID: 11400000, guid: 62e2cd216aa46724dac7d580dd1dc902, type: 2}
