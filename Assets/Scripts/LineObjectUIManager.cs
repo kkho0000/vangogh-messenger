@@ -5,6 +5,7 @@ public class LineObjectUIManager : MonoBehaviour
 {
     // 待显示的 GameObject
     public GameObject showGameObject;
+    public GameObject showGameObject1;
     // 待隐藏的 GameObject
     public GameObject hideGameObject;
     // 最后要显示的 GameObject
@@ -26,6 +27,18 @@ public class LineObjectUIManager : MonoBehaviour
             SetGameObjectPosition(showGameObject);
             StartCoroutine(HandleGameObjectChanges());
         }
+        if (!targetController.uiClick)
+        {
+            hideGameObject.SetActive(true);
+            showGameObject1.SetActive(false);
+            finalGameObject.SetActive(false);
+        }
+        if (targetController.uiClick && hasDisplayProcessCompleted)
+        {
+            hideGameObject.SetActive(false);
+            showGameObject1.SetActive(true);
+        }
+
     }
 
     private void SetGameObjectPosition(GameObject go)
@@ -45,7 +58,9 @@ public class LineObjectUIManager : MonoBehaviour
         // 隐藏已显示的 GameObject
         hideGameObject.SetActive(false);
         // 显示新的 GameObject
+
         showGameObject.SetActive(true);
+        showGameObject1.SetActive(true);
 
         // 等待 1 秒
         yield return new WaitForSeconds(1f);
