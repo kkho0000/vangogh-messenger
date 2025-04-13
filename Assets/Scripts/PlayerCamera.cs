@@ -171,15 +171,10 @@ public class PlayerCamera : MonoBehaviour
 
     private IEnumerator TriggerEndScene()
     {
-        blackScreen.gameObject.SetActive(true); // 显示黑屏
-        yield return new WaitForSeconds(0.8f); // 黑屏持续 1 秒
-        GameObject finishObject = GameObject.FindWithTag("Finish");
+        yield return new WaitForSeconds(1.5f);
+        
         virtualCamera.m_Lens.OrthographicSize = 1.8f;
-        confiner.SetActive(false);
-        blackScreen.gameObject.SetActive(false); // 关闭黑屏
-        
-        
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
 
         // 激活结算 UI 界面
         if (settlementUI != null)
