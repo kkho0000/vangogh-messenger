@@ -6,6 +6,7 @@ public class TargetData : MonoBehaviour
 {
     private bool isTrigger = false; // 是否是触发器
     private GameObject targetLine = null; // 线段物体
+    public TargetController targetController;
     public void LineUp(GameObject line)
     {
         isTrigger = true; // 设置为触发器
@@ -23,6 +24,7 @@ public class TargetData : MonoBehaviour
             Destroy(targetLine); // 销毁目标线段
             targetLine = null; // 清空目标线段引用
         }
+        targetController.uiClick=false;
     } 
 
     public bool IsTrigger()
