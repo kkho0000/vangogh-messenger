@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float jumpSpeed; // 跳跃速度
-    public float moveSpeed; // 
+    public float moveSpeed; // 移动速度
     public float ropeSpeed; // 线段速度
     public GameObject letter;
     private float speed;
@@ -57,18 +57,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse); // 添加跳跃力
             animator.SetTrigger("jump"); // 设置跳跃动画触发器
             isGround = false; // 设置在地面上为 false
-
-            // 分离移动和跳跃逻辑，先计算水平速度
-
-            // 统一设置刚体速度
-
-
-            speed = Mathf.Abs(hor * moveSpeed);
-            animator.SetFloat("speed", speed);
-            if (hor != 0)
-            {
-                transform.localScale = new Vector3(0.3f, 0.3f, hor > 0 ? 0.3f : -0.3f);
-            }
         }
     }
 
@@ -87,7 +75,6 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("mail"); // 设置完成动画触发器
             // 开始协程逐渐移动到目标位置
             transform.position = other.transform.position + new Vector3(-0.5f, -0.75f, 0);
-            //StartCoroutine(MoveToTarget(other.transform.position + new Vector3(-0.5f, -0.75f, 0)));
             // 延迟 4 秒销毁子物体
             if (letter != null)
             {

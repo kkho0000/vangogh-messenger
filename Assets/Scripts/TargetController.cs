@@ -7,8 +7,8 @@ public class TargetController : MonoBehaviour
     private bool _uiClick=false;
     private GameObject Lines; // 线段数组
     private GameObject player; // 玩家物体
-    private GameObject spawner; // 生成器物体
-    private SphereCollider sphereCollider; // 球形碰撞器
+    
+    private TargetData targetData;
     private bool isAvaliable = true; // 是否可用
     private bool isMouseOver = false; // 鼠标是否悬停在物体上
 
@@ -44,14 +44,14 @@ public class TargetController : MonoBehaviour
 
         // 设置线段的父物体为线段数组
         line.transform.SetParent(Lines.transform);
+        targetData.LineUp(line); // 设置目标线段
     }
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // 获取玩家物体
         Lines = GameObject.FindGameObjectWithTag("Lines"); // 获取线段数组物体
-        sphereCollider = GetComponent<SphereCollider>(); // 获取球形碰撞器组件
-        //spawner = transform.parent.gameObject; // 获取生成器物体
+        targetData = GetComponent<TargetData>(); // 获取目标数据组件
     }
 
     void Update()
@@ -85,8 +85,12 @@ public class TargetController : MonoBehaviour
         // 检测鼠标点击
         if (isMouseOver && Input.GetMouseButtonDown(0)) // 鼠标左键点击
         {
-            
             HandleMouseDown(); // 调用鼠标点击逻辑
+        }
+        if (isMouseOver && Input.GetMouseButtonUp(1)) // 鼠标左键释放
+        {
+            Debug.Log("Get Right Mouse Button");
+            targetData.Reset(); // 重置目标数据
         }
     }
 
@@ -121,7 +125,6 @@ public class TargetController : MonoBehaviour
         Vector3 trans = transform.position; // 获取当前物体位置
         Vector3 playerPos = player.transform.position; // 玩家位置
         InstantiateLine(playerPos + new Vector3(0, 1.4f, 0f), trans); // 实例化颜料
-        sphereCollider.enabled = false; // 禁用球形碰撞器
         _uiClick = true;
     }
     public bool uiClick
