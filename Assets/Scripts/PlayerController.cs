@@ -173,4 +173,21 @@ public class PlayerController : MonoBehaviour
         // 确保最终位置精确到目标位置
         transform.position = targetPosition;
     }
+
+    public void ResetPlayerState()
+    {
+        // 重置动画参数
+        if (animator != null)
+        {
+            animator.Rebind(); // 重置动画到默认状态
+            animator.Update(0f); // 立即更新动画状态
+        }
+
+        // 重置其他状态
+        isHolding = false;
+        isGround = true;
+        finish = false;
+        rb.velocity = Vector3.zero; // 重置速度
+        rb.isKinematic = false; // 确保刚体不是运动学
+    }
 }

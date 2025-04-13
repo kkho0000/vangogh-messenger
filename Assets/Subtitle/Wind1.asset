@@ -17,10 +17,10 @@ MonoBehaviour:
   - text: My dear Theo,
     startTime: 0
     duration: 2
-  - text: 'Thanks very much for the consignment of canvases, colours, brushes, tobacco
+  - text: 'thanks very much for the consignment of canvases, colours, brushes, tobacco
       and chocolate, '
     startTime: 2
-    duration: 5
+    duration: 7
   - text: "which reached me in good order.\r\r"
-    startTime: 7
-    duration: 9
+    startTime: 9
+    duration: 2

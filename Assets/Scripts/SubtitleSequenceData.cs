@@ -15,5 +15,6 @@ public class SubtitleSequenceData : ScriptableObject
         [TextArea] public string text; // 字幕文本
         public float startTime;        // 字幕开始时间（相对于音频开始的时间，单位：秒）
         public float duration;         // 字幕显示时长（秒）
+        //public Color color;            // 颜色
     }
 }
