@@ -121,6 +121,7 @@ public class TargetController : MonoBehaviour
     private void HandleMouseDown()
     {
         if (!isAvaliable) return; // 如果不可用则返回
+        if (targetData.IsTrigger()) return; // 如果是触发器则返回
         Vector3 trans = transform.position; // 获取当前物体位置
         Vector3 playerPos = player.transform.position; // 玩家位置
         InstantiateLine(playerPos + new Vector3(0, 1.4f, 0f), trans); // 实例化颜料
