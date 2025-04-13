@@ -26,7 +26,7 @@ public class EnermyJump : MonoBehaviour
 
         // 垂直方向弹跳，确保返回值在 0 到 1 之间
         float rawSinValue = Mathf.Abs(Mathf.Sin(Time.time * bounceFrequency));
-        float verticalOffset = (rawSinValue) / 2f * bounceHeight;
+        float verticalOffset = (rawSinValue+5f) / 2f * bounceHeight;
         Vector3 newPosition = transform.position;
         newPosition.y = verticalOffset;
         transform.position = newPosition;
@@ -46,36 +46,11 @@ public class EnermyJump : MonoBehaviour
                 player.isBlackAndWhite = true;
                 player.ToggleRender();
                 timer1 = 0f;
-                collisionCount = 0;
+                player.collisionCount = 0;
             }
             
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-           
-            PlayerCamera player = other.GetComponent<PlayerCamera>();
-            if (player != null)
-            {
-                
-                collisionCount++;
-                if (collisionCount == 1)
-                {
-                    player.isBlackAndWhite = false;
-                    player.ToggleRender();
-                }
-                else if (collisionCount == 2)
-                {
-                    player.isBlackAndWhite = true;
-                    player.ToggleRender();
-                    player.Die();
-                    //player.ReturnToSpawnPoint();
-                    collisionCount = 0; // 重置碰撞次数
-                }
-            }
-        }
-    }
+   
 }
