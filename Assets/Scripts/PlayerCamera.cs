@@ -22,10 +22,22 @@ public class PlayerCamera : MonoBehaviour
     Animator animator;
     public GameObject confiner;
     public GameObject settlementUI; // 结算 UI 界面的 GameObject
+
     public void Die()
     {
-        transform.position = GameManager.Instance.GetLastSavePosition();
+        transform.position = GameManager.Instance.GetLastSavePosition(); 
         Debug.Log("Player respawned at the last save point.");
+
+        // 获取 PlayerController 组件并重置状态
+        PlayerController playerController = GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.ResetPlayerState();
+            // 重置其他状态
+            isBlackAndWhite = false;
+            ToggleRender(); // 重置渲染效果
+
+        }
     }
 
     private void Start()
