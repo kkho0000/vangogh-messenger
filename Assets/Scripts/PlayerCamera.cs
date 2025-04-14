@@ -7,6 +7,7 @@ using static SavePoint;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 [ExecuteInEditMode]
 public class PlayerCamera : MonoBehaviour
@@ -21,9 +22,11 @@ public class PlayerCamera : MonoBehaviour
     public CinemachineVirtualCamera virtualCamera;
     Animator animator;
     public GameObject confiner;
-    public GameObject settlementUI; // 结算 UI 界面的 GameObject
+    //public GameObject settlementUI; // 结算 UI 界面的 GameObject
     private int _collisionCount = 0; // 记录碰撞次数
     private bool interactionHandled = false;
+    public string gameSceneName;
+
     public void Die()
     {
         transform.position = GameManager.Instance.GetLastSavePosition(); 
@@ -176,16 +179,14 @@ public class PlayerCamera : MonoBehaviour
         virtualCamera.m_Lens.OrthographicSize = 1.8f;
         yield return new WaitForSeconds(4f);
 
+        SceneManager.LoadScene(gameSceneName);
         // 激活结算 UI 界面
-        if (settlementUI != null)
-        {
-            settlementUI.SetActive(true);
-            virtualCamera.m_Lens.OrthographicSize = 5.3f;
-        }
-        else
-        {
-            Debug.LogError("Settlement UI GameObject is not assigned.");
-        }
+        //settlementUI.SetActive(true);
+        virtualCamera.m_Lens.OrthographicSize = 5.3f;
+        
+        
+        Debug.LogError("Settlement UI GameObject is not assigned.");
+        
 
     }
 
