@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
                 { 
                     if (!isHolding) // 如果没有持有状态
                     {
+                        animator.ResetTrigger("release"); // 重置持有动画触发器
                         startPoint = lineData.startPoint;
                         endPoint = lineData.endPoint;
 
@@ -128,6 +129,7 @@ public class PlayerController : MonoBehaviour
     // 重置持有状态的方法
     public void ResetHoldingState()
     {
+        if (!isHolding) return; // 如果没有持有状态，直接返回s
         isHolding = false; // 设置持有状态为 false
         if (lineData != null)
         {
