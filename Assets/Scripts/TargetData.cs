@@ -24,7 +24,7 @@ public class TargetData : MonoBehaviour
             Destroy(targetLine); // 销毁目标线段
             targetLine = null; // 清空目标线段引用
         }
-        targetController.uiClick=false;
+        // targetController.uiClick=false;
     } 
 
     public bool IsTrigger()
